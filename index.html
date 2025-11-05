@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Franchini Macéo">
+    <title>Macéo FRANCHINI - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Hero */
+        header {
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(102, 126, 234, 0.85) 10%, rgba(118, 75, 162, 0.85) 100%),
+                url('style/maceo.jpg') center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 2rem;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-text {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-card i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Formation Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-content img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .timeline-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card .date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 5px;
+            transition: width 1s ease-out;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-body p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .project-footer {
+            padding: 1rem 1.5rem;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        /* Hobbies Section */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .hobby-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .hobby-card:hover {
+            transform: scale(1.05);
+        }
+
+        .hobby-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .hobby-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-item a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.1);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .about-content {
+                display: block;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 60px;
+            }
+
+            .timeline-content img {
+                width: 100%;
+                height: auto;
+            }
+
+            .timeline-icon {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">MF</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#propos">À propos</a></li>
+                <li><a href="#formation">Formation</a></li>
+                <li><a href="#experience">Expérience</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#divers">Loisirs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+<!-- Hero Header -->
+    <header id="accueil"> 
+        <div class="hero-content"> 
+            <h1>Macéo FRANCHINI</h1> 
+            <p class="hero-subtitle">Étudiant en BUT Réseaux & Télécommunications</p> 
+            <p class="hero-description"> Passionné par les technologies réseau et l'informatique, je recherche un stage de 10 semaines du mardi 7 avril 2026 au vendredi 12 juin 2026 inclus pour approfondir mes compétences en administration réseaux et télécommunications. </p> 
+            <div class="social-links"> <a href="https://www.linkedin.com/in/macéo-franchini-80299a345" target="_blank"><i class="fab fa-linkedin"></i></a> 
+                <a href="mailto:Maceo.FRANCHINI@etu.uca.fr"><i class="fas fa-envelope"></i></a> 
+            </div> 
+        </div> 
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down" style="color: white; font-size: 2rem;"></i> 
+        </div> 
+    </header> 
+        <main> <!-- About Section --> 
+            <section id="propos"> 
+                <div class="section-header"> 
+                    <h2 class="section-title">À Propos</h2> 
+                </div> 
+                <div class="about-content"> 
+                    <div class="about-text"> 
+                        <p> 
+                            Je suis actuellement en première année de BUT Réseaux et Télécommunications à l'Université Clermont Auvergne. Diplômé du baccalauréat général en 2024 avec les spécialités Mathématiques et Numérique et Sciences de l'Informatique (NSI), je construis ma carrière dans le domaine des réseaux informatiques et des télécommunications. 
+                        </p> 
+                        <p>
+                             Mon parcours académique m'a permis de développer une solide base en programmation (Python, HTML/CSS, JavaScript) et en logique mathématique, compétences essentielles pour la compréhension des protocoles réseau et de la cryptographie. 
+                        </p> 
+                        <p> 
+                            Ce qui me caractérise ? Ma curiosité intellectuelle, mon esprit d'équipe et ma capacité à persévérer face aux défis techniques. J'aime comprendre en profondeur comment fonctionnent les systèmes et trouver des solutions innovantes aux problèmes complexes. 
+                        </p> 
+                        <p>
+                            <strong>Objectif professionnel :</strong> Réaliser un stage de 10 semaines du 7 avril au 12 juin 2026 afin de mettre en pratique mes compétences en administration réseau, configuration d’équipements et gestion d’infrastructures. À partir de septembre 2025, je souhaite poursuivre en BUT 2 en alternance (rythme : 1 mois en entreprise / 1 mois à l’IUT) pour gagner en expérience professionnelle tout en consolidant mes connaissances.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formation Section -->
+        <section id="formation">
+            <div class="section-header">
+                <h2 class="section-title">Formation</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>BUT Réseaux & Télécommunications</h3>
+                        <p class="timeline-date">2024 - Présent | Université Clermont Auvergne</p>
+                        <p>
+                            Formation complète axée sur l'administration réseau, les télécommunications et la cybersécurité. L'approche pratique de la formation me permet de manipuler quotidiennement du matériel réseau (switchs, routeurs, points d'accès) et d'utiliser des outils professionnels comme Cisco Packet Tracer et Wireshark.
+                        </p>
+                        <p><strong>Compétences développées :</strong></p>
+                        <ul style="margin-left: 1.5rem; color: var(--gray);">
+                            <li>• Configuration et administration de réseaux LAN/WAN</li>
+                            <li>• Protocoles réseau (TCP/IP, DHCP, DNS, routage)</li>
+                            <li>• Sécurité réseau et pare-feu</li>
+                            <li>• Télécommunications et fibres optiques</li>
+                            <li>• Programmation système et réseau</li>
+                        </ul>
+                        <img src="style/image_but.jpg" alt="BUT Réseaux et Télécommunications">
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Baccalauréat Général</h3>
+                        <p class="timeline-date">2024 | Lycée Georges Cabanis, Brive-la-Gaillarde</p>
+                        <p>
+                            Spécialités Mathématiques et Numérique et Sciences de l'Informatique (NSI). Ces spécialités m'ont fourni les fondamentaux nécessaires pour aborder les études supérieures en informatique : algorithmique, structures de données, bases de programmation Python, et raisonnement logique.
+                        </p>
+                        <p><strong>Points clés :</strong></p>
+                        <ul style="margin-left: 1.5rem; color: var(--gray);">
+                            <li>• Initiation à la programmation en Python</li>
+                            <li>• Développement web (HTML/CSS/JavaScript)</li>
+                            <li>• Bases de données et SQL</li>
+                            <li>• Algorithmique et structures de données</li>
+                            <li>• Mathématiques appliquées à l'informatique</li>
+                        </ul>
+                        <img src="style/Caba.jpg" alt="Lycée Georges Cabanis">
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <div class="section-header">
+                <h2 class="section-title">Expérience Professionnelle</h2>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3><i class="fas fa-fire-extinguisher"></i> Sapeur-Pompier Volontaire</h3>
+                    <p class="date">Juin 2024 - Présent | Centre de Secours d'Ayen (19)</p>
+                    <p>
+                        Intégration du centre de secours après l'obtention du Brevet National de Sapeur-Pompier. Cette expérience développe mes capacités de travail en équipe sous pression, ma gestion du stress et mon sens des responsabilités. Disponibilité pour les interventions d'urgence et formation continue aux techniques de secours.
+                    </p>
+                    <p><strong>Compétences acquises :</strong> Travail d'équipe, gestion de crise, rigueur, rapidité de décision</p>
+                </div>
+
+                <div class="experience-card">
+                    <h3><i class="fas fa-box"></i> Manutentionnaire</h3>
+                    <p class="date">Été 2023 & 2024 | Entreprise Silab</p>
+                    <p>
+                        Deux semaines de mission chaque été au sein d'une entreprise leader en cosmétique naturelle. Travail en équipe dans un environnement industriel exigeant, polyvalence sur différents postes de la chaîne logistique. Cette expérience m'a appris l'importance de l'organisation, de la ponctualité et de la communication en milieu professionnel.
+                    </p>
+                    <p><strong>Compétences acquises :</strong> Organisation, polyvalence, esprit d'équipe, rigueur professionnelle</p>
+                </div>
+
+                <div class="experience-card">
+                    <h3><i class="fas fa-laptop"></i> Stage - Service Informatique</h3>
+                    <p class="date">2022 | Entreprise Silab</p>
+                    <p>
+                        Stage de découverte de deux semaines au sein du service informatique. Immersion dans l'infrastructure réseau d'une entreprise de 250 employés : observation de l'administration réseau, découverte des serveurs, systèmes de sauvegarde, sécurité informatique et gestion du parc informatique. Ce stage a été déterminant dans mon choix d'orientation vers les réseaux.
+                    </p>
+                    <p><strong>Découvertes clés :</strong> Infrastructure réseau entreprise, gestion Active Directory, tickets support, sécurité IT</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="competences">
+            <div class="section-header">
+                <h2 class="section-title">Compétences</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Réseaux</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>DHCP/DNS</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>VLANs & Routage</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-signal"></i> Télécommunications</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Signaux sinusoïdaux</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Fibres optiques</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i>Programmation</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML/CSS</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-language"></i> Langues</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Français (Natif)</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Anglais (B2)</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projets">
+            <div class="section-header">
+                <h2 class="section-title">Projets Techniques</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Réseaux Locaux Virtuels</h3>
+                        <div class="project-tags">
+                            <span class="tag">Cisco Packet Tracer</span>
+                            <span class="tag">Réseaux</span>
+                            <span class="tag">TCP/IP</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p><strong>Durée :</strong> 7 séances de 2h en binôme</p>
+                        <p>
+                            Conception et réalisation d'architectures réseau complexes sur Cisco Packet Tracer. Le projet a débuté par la création de réseaux simples (switch + 2 PC) pour progresser vers des infrastructures multi-sites avec routage inter-VLAN, serveurs DNS/DHCP et points d'accès Wi-Fi.
+                        </p>
+                        <p><strong>Réalisations techniques :</strong></p>
+                        <ul style="margin-left: 1.5rem; color: var(--gray); font-size: 0.95rem;">
+                            <li>• Segmentation réseau via VLANs pour isolation du trafic</li>
+                            <li>• Configuration de routage statique et dynamique</li>
+                            <li>• Déploiement de services DHCP et DNS</li>
+                            <li>• Mise en place d'ACL pour filtrage de sécurité</li>
+                            <li>• Architecture multi-sites interconnectés</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>Compétences développées :</strong> Maîtrise du protocole IP, compréhension approfondie des couches OSI, capacité à diagnostiquer et résoudre des problèmes d'adressage et de routage, persévérance face aux défis techniques.
+                        </p>
+                    </div>
+                    <div class="project-footer">
+                        <span style="color: var(--gray); font-size: 0.9rem;">2024</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Portfolio Personnel</h3>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p><strong>Durée :</strong> 6 semaines en autonomie</p>
+                        <p>
+                            Conception et développement d'un portfolio web personnel responsive et interactif. Le projet englobe la création d'une interface utilisateur moderne, l'implémentation de fonctionnalités JavaScript pour l'interactivité, et l'optimisation pour tous types d'appareils.
+                        </p>
+                        <p><strong>Fonctionnalités développées :</strong></p>
+                        <ul style="margin-left: 1.5rem; color: var(--gray); font-size: 0.95rem;">
+                            <li>• Navigation fluide avec scroll smooth</li>
+                            <li>• Menu hamburger adaptatif pour mobile</li>
+                            <li>• Système de progression visuelle des compétences</li>
+                            <li>• Cartes de projets avec effet flip interactif</li>
+                            <li>• Design responsive (mobile-first)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>Compétences développées :</strong> Maîtrise du développement front-end, design UI/UX, responsive design, créativité dans la présentation de contenu, capacité à mener un projet de bout en bout.
+                        </p>
+                    </div>
+                    <div class="project-footer">
+                        <span style="color: var(--gray); font-size: 0.9rem;">2024-2025</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>TP Protocole DHCP</h3>
+                        <div class="project-tags">
+                            <span class="tag">DHCP</span>
+                            <span class="tag">Wireshark</span>
+                            <span class="tag">Linux</span>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <p><strong>Objectif :</strong> Étude approfondie du protocole DHCP</p>
+                        <p>
+                            Travaux pratiques sur l'analyse et la configuration du protocole DHCP dans divers scénarios. Installation et configuration d'un serveur DHCP (isc-dhcp-server) sous Linux, analyse des trames avec Wireshark pour observer les échanges DISCOVER/OFFER/REQUEST/ACK.
+                        </p>
+                        <p><strong>Scénarios étudiés :</strong></p>
+                        <ul style="margin-left: 1.5rem; color: var(--gray); font-size: 0.95rem;">
+                            <li>• Configuration serveur DHCP unique avec gestion des baux</li>
+                            <li>• Analyse protocolaire avec Wireshark (couches 2/3/4)</li>
+                            <li>• Comportement multi-serveurs et failover</li>
+                            <li>• Relais DHCP pour architectures multi-sous-réseaux</li>
+                            <li>• Configuration de plages d'adresses par VLAN</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                            <strong>Compétences développées :</strong> Administration de services réseau, analyse de protocoles, configuration Linux, diagnostic réseau, compréhension des mécanismes d'allocation d'IP.
+                        </p>
+                    </div>
+                    <div class="project-footer">
+                        <span style="color: var(--gray); font-size: 0.9rem;">2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section id="divers">
+            <div class="section-header">
+                <h2 class="section-title">Centres d'Intérêt</h2>
+            </div>
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-biking"></i>
+                    </div>
+                    <h3>VTT Compétition</h3>
+                    <p>
+                        Membre du CycloTourisme Objatois (CTO) depuis 2016. Participation à de nombreuses compétitions régionales et nationales. Point culminant : <strong>5ème place ex-aequo aux Championnats de France de CycloTourisme</strong>.
+                    </p>
+                    <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                        Le VTT m'apporte dépassement de soi, persévérance et esprit d'équipe.
+                    </p>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-drum"></i>
+                    </div>
+                    <h3>Batterie & Musique</h3>
+                    <p>
+                        Pratique de la batterie depuis 6 ans à l'école de musique d'Objat. Membre actif de la <strong>Banda d'Objat</strong>, orchestre qui anime les événements culturels locaux.
+                    </p>
+                    <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                        La musique développe ma coordination, mon sens du rythme et ma capacité à jouer en groupe.
+                    </p>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-fire-extinguisher"></i>
+                    </div>
+                    <h3>Sapeur-Pompier</h3>
+                    <p>
+                        Pompier volontaire au Centre de Secours d'Ayen depuis juin 2024. Intervention sur les urgences, formation continue aux techniques de secours et participation à la vie du centre.
+                    </p>
+                    <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                        Engagement citoyen qui renforce mon sens des responsabilités et ma gestion du stress.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+            </div>
+            <div class="contact-container">
+                <p style="font-size: 1.3rem; margin-bottom: 2rem; color: var(--dark);">
+                    Intéressé par mon profil ? N'hésitez pas à me contacter !
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <strong>Email</strong>
+                        <a>Maceo.FRANCHINI@etu.uca.fr</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <strong>CV</strong>
+                        <a href="CV.pdf" download>Télécharger mon CV</a>
+                    </div>
+                </div>
+                <a href="mailto:Maceo.FRANCHINI@etu.uca.fr" class="btn" style="margin-top: 2rem;">
+                    <i class="fas fa-paper-plane"></i> M'envoyer un message
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024-2025 Macéo FRANCHINI - Tous droits réservés</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+            Étudiant en BUT Réseaux & Télécommunications | Université Clermont Auvergne
+        </p>
+    </footer>
+
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar hide on scroll
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                navbar.classList.remove('hidden');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Animate skills on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.getElementById('competences');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // Animate sections on scroll
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s, transform 0.6s';
+            sectionObserver.observe(section);
+        });
+    </script>
+</body>
+</html>
